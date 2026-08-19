@@ -3,6 +3,7 @@ import pandas as pd
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
+import streamlit.components.v1 as components
 
 # Load environment variables
 load_dotenv()
@@ -99,7 +100,7 @@ st.markdown("""
     }
     
     /* Button overrides */
-    .stButton > button {
+    .st-key-run-ai-btn > button {
         background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 100%) !important;
         border: 1px solid rgba(255, 255, 255, 0.1) !important;
         color: #fff !important;
@@ -110,18 +111,18 @@ st.markdown("""
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
         box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
     }
-    .stButton > button:hover {
+    .st-key-run-ai-btn > button:hover {
         background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 100%) !important;
         border-color: rgba(255, 255, 255, 0.2) !important;
         transform: translateY(-2px) !important;
         box-shadow: 0 8px 24px rgba(0,0,0,0.4) !important;
     }
-    .stButton > button:active {
+    .st-key-run-ai-btn > button:active {
         transform: translateY(1px) !important;
     }
 
     /* Data Editor */
-    [data-testid="stDataFrame"] {
+    .st-key-portfolio-editor {
         border-radius: 16px;
         overflow: hidden;
         border: 1px solid rgba(255,255,255,0.1);
@@ -213,6 +214,46 @@ Analyze the provided inputs and deliver your assessment.
 st.title("📈 Omni-Quant Portfolio Terminal & Sentiment Roaster")
 st.markdown("Welcome to the ultimate hedge fund dashboard. Manage your state, visualize data, and get absolutely roasted by our multimodal AI.")
 
+# Three.js 3D Visualization via components.html
+components.html(
+    """
+    <div id="canvas-container" style="width: 100%; height: 300px; overflow: hidden; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5);"></div>
+    <script type="module">
+        import * as THREE from 'https://cdn.skypack.dev/three@0.136.0';
+        
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        container.appendChild(renderer.domElement);
+        
+        const geometry = new THREE.TorusKnotGeometry(10, 2.5, 120, 16);
+        const material = new THREE.MeshBasicMaterial({ color: 0x4a90e2, wireframe: true, transparent: true, opacity: 0.8 });
+        const torusKnot = new THREE.Mesh(geometry, material);
+        scene.add(torusKnot);
+        
+        camera.position.z = 25;
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            torusKnot.rotation.x += 0.005;
+            torusKnot.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+        animate();
+        
+        window.addEventListener('resize', () => {
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        });
+    </script>
+    """,
+    height=310,
+)
+
 # Update allocation based on current session state
 current_df = update_allocation(st.session_state.portfolio_df.copy())
 total_portfolio_value = current_df["Position Size ($)"].sum()
@@ -254,7 +295,7 @@ with col_left:
         },
         hide_index=True,
         use_container_width=True,
-        key="portfolio_editor"
+        key="portfolio-editor"
     )
     
     # Update session state with edited positions (dropping calculated allocation for clean state)
@@ -272,7 +313,7 @@ with col_right:
         uploaded_image = st.camera_input("Upload a screenshot of your technical setup")
         recorded_audio = st.audio_input("Dictate your market thesis")
         
-        submit_button = st.form_submit_button("Run AI Quant Analysis", type="primary")
+        submit_button = st.form_submit_button("Run AI Quant Analysis", type="primary", key="run-ai-btn")
 
     if submit_button:
         with st.spinner("Analyzing portfolio, chart, and thesis... Brace yourself."):
