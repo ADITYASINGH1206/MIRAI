@@ -25,7 +25,8 @@ if API_KEY:
     genai.configure(api_key=API_KEY)
 
 # --- CSS OVERRIDES & STYLING ---
-st.markdown("""
+def inject_theme():
+    st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
@@ -266,6 +267,9 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# Inject Global Dark-Mode HUD Theme
+inject_theme()
+
 
 # --- ACTIVITY LOGGING & MOCK DATA ---
 def generate_mock_activity_log():
@@ -427,7 +431,7 @@ def run_explain_pipeline(topic_query):
         st.error("Gemini API key is not configured.")
         return False
     try:
-        model = genai.GenerativeModel("gemini-1.5-pro")
+        model = genai.GenerativeModel("gemini-2.5-flash")
         prompt = f"""
 You are an expert AI Educator.
 Explain the topic: "{topic_query}".
@@ -459,7 +463,7 @@ def run_quiz_builder_pipeline(raw_content):
         st.error("Gemini API key is not configured.")
         return False
     try:
-        model = genai.GenerativeModel("gemini-1.5-pro")
+        model = genai.GenerativeModel("gemini-2.5-flash")
         prompt = f"""
 Analyze the following study material and generate a 5-question multiple choice quiz:
 \"\"\"{raw_content}\"\"\"
@@ -496,7 +500,7 @@ def run_study_os_pipeline(context_text, audio_stream=None, image_stream=None):
         return False
 
     try:
-        model = genai.GenerativeModel("gemini-1.5-pro")
+        model = genai.GenerativeModel("gemini-2.5-flash")
         prompt = """
 You are the Study OS Multimodal AI Engine.
 Analyze the user's input context and generate a complete, structured JSON payload.
