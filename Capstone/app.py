@@ -25,7 +25,8 @@ if API_KEY:
     genai.configure(api_key=API_KEY)
 
 # --- CSS OVERRIDES & STYLING ---
-st.markdown("""
+def inject_theme():
+    st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
@@ -265,6 +266,9 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+
+# Inject Global Dark-Mode HUD Theme
+inject_theme()
 
 
 # --- ACTIVITY LOGGING & MOCK DATA ---
