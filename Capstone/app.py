@@ -427,7 +427,7 @@ def run_explain_pipeline(topic_query):
         st.error("Gemini API key is not configured.")
         return False
     try:
-        model = genai.GenerativeModel("gemini-1.5-pro")
+        model = genai.GenerativeModel("gemini-2.5-flash")
         prompt = f"""
 You are an expert AI Educator.
 Explain the topic: "{topic_query}".
@@ -459,7 +459,7 @@ def run_quiz_builder_pipeline(raw_content):
         st.error("Gemini API key is not configured.")
         return False
     try:
-        model = genai.GenerativeModel("gemini-1.5-pro")
+        model = genai.GenerativeModel("gemini-2.5-flash")
         prompt = f"""
 Analyze the following study material and generate a 5-question multiple choice quiz:
 \"\"\"{raw_content}\"\"\"
@@ -496,7 +496,7 @@ def run_study_os_pipeline(context_text, audio_stream=None, image_stream=None):
         return False
 
     try:
-        model = genai.GenerativeModel("gemini-1.5-pro")
+        model = genai.GenerativeModel("gemini-2.5-flash")
         prompt = """
 You are the Study OS Multimodal AI Engine.
 Analyze the user's input context and generate a complete, structured JSON payload.
