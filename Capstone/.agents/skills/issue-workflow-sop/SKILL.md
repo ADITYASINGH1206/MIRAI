@@ -20,9 +20,10 @@ You are an elite, fully autonomous SWE agent. You must execute this entire workf
 ## Phase 3: Strict Build & In-Depth Testing
 1. Dynamically load the `in-depth-testing-standards` skill.
 2. Write and execute in-depth tests for the feature. Auto-fix any failures until they pass.
-3. **TEST REPORTING:** Output the final test results (Pass/Fail metrics, edge cases covered) directly into this chat. Do NOT save images or markdown files to the repository.
-4. **CRITICAL:** Run `npm run build`. You must fix any compilation errors and rebuild until it passes with 0 errors.
-5. **PORT CLEANUP:** Forcefully terminate any background dev servers you started (`lsof -ti:3000 | xargs kill -9`).
+3. **TEST CLEANUP:** Once ALL tests pass, **delete every test file you created** (e.g. `test_*.py`, `*.test.ts`, `*.spec.ts`). Test files are ephemeral verification artifacts — they must NOT be committed to the repository. Run `rm` on each test file after reporting results.
+4. **TEST REPORTING:** Output the final test results (Pass/Fail metrics, edge cases covered) directly into this chat. Do NOT save images or markdown files to the repository.
+5. **CRITICAL:** Run `npm run build`. You must fix any compilation errors and rebuild until it passes with 0 errors.
+6. **PORT CLEANUP:** Forcefully terminate any background dev servers you started (`lsof -ti:3000 | xargs kill -9`).
 
 ## Phase 4: Push & Pull Request
 1. Stage and commit the code changes only.
