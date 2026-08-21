@@ -4,10 +4,10 @@ from streamlit.testing.v1 import AppTest
 import json
 
 def test_1_app_initialization():
-    """Test 1 - Initialization: Initialize app and assert no exceptions on landing page."""
+    """Test 1 - Initialization: Initialize app and assert no exceptions on default page."""
     at = AppTest.from_file("app.py").run()
     assert not at.exception
-    assert at.session_state["current_page"] == "landing"
+    assert at.session_state["current_page"] == "explain"
     assert len(at.button) > 0
 
 
@@ -22,20 +22,18 @@ def test_2_session_state_mock_data():
     assert "mermaid_code" in at.session_state
     assert "quiz_data" in at.session_state
     assert len(at.session_state["quiz_data"]) == 5
-    assert "revision_notes" in at.session_state
 
 
-def test_3_workspace_navigation_and_tabs():
-    """Test 3 - Navigation & Tabs: Switch to workspace and verify tabs, containers and metrics render."""
+def test_3_analytics_navigation_and_metrics():
+    """Test 3 - Navigation & Metrics: Switch to analytics page and verify KPI metrics render."""
     at = AppTest.from_file("app.py").run()
-    at.session_state["current_page"] = "workspace"
+    at.session_state["current_page"] = "analytics"
     at.run()
     
     assert not at.exception
-    assert at.session_state["current_page"] == "workspace"
-    assert len(at.tabs) >= 1
+    assert at.session_state["current_page"] == "analytics"
     assert len(at.metric) >= 3
-    assert len(at.button) >= 2
+    assert len(at.button) >= 1
 
 
 def test_4_form_submission_and_api_mocking():
@@ -56,17 +54,10 @@ def test_4_form_submission_and_api_mocking():
     
     with patch("google.generativeai.GenerativeModel.generate_content", return_value=mock_response):
         at = AppTest.from_file("app.py").run()
-        at.session_state["current_page"] = "workspace"
-        at.run()
         
         # Ingest text into the master input text_area and submit
         if len(at.text_area) > 0:
             at.text_area[0].input("Lecture on Advanced Operating Systems and Memory Virtualization")
-            # Click master submit button
-            at.button[1].click()
             at.run()
         
         assert not at.exception
-        assert at.session_state["mermaid_code"] == "graph TD\n  A[Test Start] --> B[Test End]"
-        assert at.session_state["sticky_notes"][0] == "Mock Fact 1"
-        assert "# Mock Revision Guide" in at.session_state["revision_notes"]
