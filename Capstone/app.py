@@ -47,7 +47,7 @@ def inject_theme():
     
     st.markdown(f"""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;520;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap');
 
     #MainMenu, header, footer, [data-testid="stToolbar"] {{visibility: hidden !important; height: 0 !important;}}
     .block-container {{
