@@ -19,3 +19,9 @@ __pycache__/
 ._*
 .Spotlight-V100
 .Trashes
+.env
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+.agents/

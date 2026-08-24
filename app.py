@@ -29,22 +29,7 @@ if API_KEY:
 # ═══════════════════════════════════════════════════════
 
 def inject_theme():
-    # Dynamic Theme Injection
-    is_light = st.session_state.get("theme", "Dark") == "Light"
-    
-    # Palette
-    bg = "#F9FAFB" if is_light else "#070708"
-    sidebar_bg = "#FFFFFF" if is_light else "#0d0e0f"
-    text = "#111827" if is_light else "#e5e2e3"
-    text_muted = "#6B7280" if is_light else "#9A9DA3"
-    border = "rgba(0,0,0,0.1)" if is_light else "#232426"
-    panel_bg = "rgba(255, 255, 255, 0.92)" if is_light else "rgba(13, 14, 15, 0.92)"
-    hover_bg = "rgba(0,0,0,0.04)" if is_light else "rgba(255,255,255,0.04)"
-    btn_bg = "#F3F4F6" if is_light else "#191A1C"
-    btn_hover_bg = "#E5E7EB" if is_light else "#232426"
-    accent = "#2563EB" if is_light else "#5E6BFF"
-    accent_text = "#1D4ED8" if is_light else "#bec2ff"
-    
+    # custom-ref.md tokens
     st.markdown(f"""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap');
@@ -59,14 +44,14 @@ def inject_theme():
     }}
 
     .stApp {{
-        background-color: {bg} !important;
-        font-family: 'Inter', sans-serif !important;
-        color: {text} !important;
+        background-color: #000000 !important;
+        font-family: 'Cascadia Mono', 'SFMono-Regular', 'Fira Code', Consolas, ui-monospace, monospace !important;
+        color: #f1f0e8 !important;
     }}
 
     section[data-testid="stSidebar"] {{
-        background-color: {sidebar_bg} !important;
-        border-right: 1px solid {border} !important;
+        background-color: #000000 !important;
+        border-right: 1px solid #2d2d29 !important;
         width: 260px !important;
         min-width: 260px !important;
     }}
@@ -76,123 +61,104 @@ def inject_theme():
         padding-right: 0.75rem !important;
     }}
     section[data-testid="stSidebar"] [data-testid="stSidebarContent"] {{
-        background-color: {sidebar_bg} !important;
+        background-color: #000000 !important;
     }}
 
     h1, h2, h3, h4, h5, h6 {{
-        font-family: 'Manrope', sans-serif !important;
-        font-weight: 600 !important;
-        letter-spacing: -0.04em !important;
-        color: {text} !important;
+        font-family: 'Cascadia Mono', 'SFMono-Regular', 'Fira Code', Consolas, ui-monospace, monospace !important;
+        font-weight: 400 !important;
+        color: #f1f0e8 !important;
     }}
 
     div[data-testid="stVerticalBlockBorderWrapper"] {{
-        border: 1px solid {border} !important;
+        border: 1px solid #2d2d29 !important;
         border-radius: 4px !important;
-        background: {panel_bg} !important;
-        backdrop-filter: blur(16px) !important;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.06) !important;
+        background: #171815 !important;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 18px 48px 0px !important;
         padding: 16px !important;
-        transition: border-color 0.2s ease !important;
+        transition: all 200ms ease !important;
     }}
     div[data-testid="stVerticalBlockBorderWrapper"]:hover {{
-        border-color: rgba(94, 107, 255, 0.4) !important;
+        border-color: #6f6d67 !important;
     }}
 
     .stButton > button {{
-        font-family: 'JetBrains Mono', monospace !important;
-        font-size: 0.75rem !important;
-        font-weight: 600 !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.08em !important;
-        background: {btn_bg} !important;
-        border: 1px solid {border} !important;
-        color: {text} !important;
+        font-family: 'Cascadia Mono', 'SFMono-Regular', 'Fira Code', Consolas, ui-monospace, monospace !important;
+        font-size: 14px !important;
+        font-weight: 400 !important;
+        background: #171815 !important;
+        border: 1px solid #2d2d29 !important;
+        color: #f1f0e8 !important;
         padding: 8px 16px !important;
         border-radius: 4px !important;
-        transition: all 0.2s ease !important;
+        transition: all 200ms ease !important;
     }}
     .stButton > button:hover {{
-        background: {btn_hover_bg} !important;
-        border-color: {accent} !important;
+        background: rgba(22, 23, 20, 1) !important;
+        border-color: #6f6d67 !important;
+    }}
+    .stButton > button:focus-visible {{
+        outline: 2px solid #f1f0e8 !important;
+        outline-offset: 2px !important;
+    }}
+    .stButton > button:active {{
+        transform: scale(0.98) !important;
     }}
 
     [data-testid="stFormSubmitButton"] > button {{
-        background: {text} !important;
+        background: #f1f0e8 !important;
         border: none !important;
-        color: {bg} !important;
-        font-weight: 700 !important;
+        color: #070807 !important;
+        font-weight: 600 !important;
         padding: 10px 20px !important;
+        box-shadow: rgb(90, 167, 255) 0px -3px 0px 0px inset !important;
     }}
     [data-testid="stFormSubmitButton"] > button:hover {{
-        background: {accent} !important;
-        color: #FFFFFF !important;
+        background: #a6a39b !important;
     }}
 
     [data-testid="stMetric"] {{
-        background: {panel_bg} !important;
-        border: 1px solid {border} !important;
+        background: #171815 !important;
+        border: 1px solid #2d2d29 !important;
         border-radius: 4px !important;
         padding: 14px 16px !important;
     }}
     [data-testid="stMetricLabel"] {{
-        font-family: 'Inter', sans-serif !important;
-        font-size: 0.68rem !important;
-        text-transform: uppercase !important;
-        color: {text_muted} !important;
-        letter-spacing: 0.04em !important;
+        font-family: 'Cascadia Mono', 'SFMono-Regular', 'Fira Code', Consolas, ui-monospace, monospace !important;
+        font-size: 13px !important;
+        color: #a6a39b !important;
     }}
     [data-testid="stMetricValue"] {{
-        font-family: 'Manrope', sans-serif !important;
-        font-weight: 800 !important;
-        font-size: 2rem !important;
-        color: {text} !important;
-        letter-spacing: -0.03em !important;
+        font-family: 'Cascadia Mono', 'SFMono-Regular', 'Fira Code', Consolas, ui-monospace, monospace !important;
+        font-weight: 400 !important;
+        font-size: 30px !important;
+        color: #f1f0e8 !important;
     }}
 
     .stTextInput input, .stTextArea textarea {{
-        background: {btn_bg} !important;
-        border: 1px solid {border} !important;
-        color: {text} !important;
-        font-family: 'Inter', sans-serif !important;
+        background: #171815 !important;
+        border: 1px solid #2d2d29 !important;
+        color: #f1f0e8 !important;
+        font-family: 'Cascadia Mono', 'SFMono-Regular', 'Fira Code', Consolas, ui-monospace, monospace !important;
         border-radius: 4px !important;
     }}
-    .stTextInput input:focus, .stTextArea textarea:focus {{
-        border-color: {accent} !important;
-        box-shadow: 0 0 0 1px {accent} !important;
-    }}
-
-    .stRadio > div {{ gap: 6px !important; }}
-    .stRadio label {{
-        background: {sidebar_bg} !important;
-        border: 1px solid {border} !important;
-        border-radius: 4px !important;
-        padding: 10px 14px !important;
-        color: {text} !important;
-        font-size: 0.88rem !important;
-        transition: all 0.15s ease !important;
-    }}
-    .stRadio label:hover {{ border-color: {accent} !important; }}
-
-    .streamlit-expanderHeader {{
-        background: transparent !important;
-        border: none !important;
-        color: {text_muted} !important;
-        font-family: 'JetBrains Mono', monospace !important;
-        font-size: 0.78rem !important;
+    .stTextInput input:focus-visible, .stTextArea textarea:focus-visible {{
+        border-color: #f1f0e8 !important;
+        outline: 2px solid #f1f0e8 !important;
+        outline-offset: 2px !important;
     }}
 
     .heatmap-cell {{
         width: 12px; height: 12px;
         border-radius: 2px;
-        background-color: {btn_bg};
-        border: 1px solid {border};
+        background-color: #171815;
+        border: 1px solid #2d2d29;
         display: inline-block;
     }}
-    .heatmap-cell.level-1 {{ background-color: rgba(94, 107, 255, 0.2); }}
-    .heatmap-cell.level-2 {{ background-color: rgba(94, 107, 255, 0.4); }}
-    .heatmap-cell.level-3 {{ background-color: rgba(94, 107, 255, 0.7); }}
-    .heatmap-cell.level-4 {{ background-color: {accent}; }}
+    .heatmap-cell.level-1 {{ background-color: rgba(22, 23, 20, 1); }}
+    .heatmap-cell.level-2 {{ background-color: #6f6d67; }}
+    .heatmap-cell.level-3 {{ background-color: #a6a39b; }}
+    .heatmap-cell.level-4 {{ background-color: #f1f0e8; }}
 
     .quiz-correct {{
         background: rgba(16,185,129,0.08) !important;
@@ -206,43 +172,41 @@ def inject_theme():
     }}
 
     .mono-telemetry {{
-        font-family: 'JetBrains Mono', monospace !important;
-        font-size: 0.68rem !important; font-weight: 600 !important;
-        text-transform: uppercase !important; letter-spacing: 0.15em !important;
-        color: {text_muted} !important;
+        font-family: 'Cascadia Mono', 'SFMono-Regular', 'Fira Code', Consolas, ui-monospace, monospace !important;
+        font-size: 13px !important;
+        color: #a6a39b !important;
     }}
     .fig-label {{
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.65rem; font-weight: 600;
-        text-transform: uppercase; letter-spacing: 0.12em;
-        color: {text_muted}; margin-bottom: 12px;
+        font-family: 'Cascadia Mono', 'SFMono-Regular', 'Fira Code', Consolas, ui-monospace, monospace;
+        font-size: 12px;
+        color: #a6a39b; margin-bottom: 12px;
     }}
     .stitch-card {{
-        background: {panel_bg};
-        border: 1px solid {border};
+        background: #171815;
+        border: 1px solid #2d2d29;
         border-radius: 4px;
         padding: 18px;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
-        transition: border-color 0.2s ease;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 18px 48px 0px;
+        transition: border-color 200ms ease;
     }}
-    .accent-text {{ color: {accent_text}; }}
-    .cyan-text {{ color: #0ea5e9; }}
     
     /* Custom Sidebar Nav via HTML */
     .sb-nav-item {{
         display: flex; align-items: center; gap: 10px;
-        color: {text_muted}; text-decoration: none;
-        font-family: 'Inter', sans-serif; font-size: 0.88rem;
-        padding: 10px 12px; border-radius: 6px; margin: 2px 0;
-        transition: all 0.15s ease;
+        color: #a6a39b; text-decoration: none;
+        font-family: 'Cascadia Mono', 'SFMono-Regular', 'Fira Code', Consolas, ui-monospace, monospace; 
+        font-size: 14px;
+        padding: 10px 12px; border-radius: 4px; margin: 2px 0;
+        transition: all 200ms ease;
     }}
-    .sb-nav-item:hover {{
-        background: {hover_bg}; color: {text};
+    .sb-nav-item:hover, .sb-nav-item:focus-visible {{
+        background: rgba(22, 23, 20, 1); color: #f1f0e8;
+        outline: none;
     }}
     .sb-nav-active {{
-        background: rgba(94,107,255,0.08);
-        border-right: 3px solid {accent};
-        color: {accent_text}; font-weight: 500;
+        background: rgba(22, 23, 20, 1);
+        border-left: 2px solid #f1f0e8;
+        color: #f1f0e8; 
     }}
     .sb-nav-item svg {{
         width: 16px; height: 16px; flex-shrink: 0;
@@ -294,9 +258,11 @@ def init_state():
     elif "current_page" not in st.session_state:
         st.session_state.current_page = "explain"
 
-
     if "activity_log" not in st.session_state:
         st.session_state.activity_log = generate_mock_activity_log()
+
+    if "my_notes" not in st.session_state:
+        st.session_state.my_notes = []
 
     # Prerequisite Roadmap
     if "mermaid_code" not in st.session_state:
@@ -484,21 +450,15 @@ Output raw JSON only."""
 #  STITCH LEFT SIDEBAR — Exact replica of SideNavBar
 # ═══════════════════════════════════════════════════════
 with st.sidebar:
-    # Theme Toggle
-    theme_choice = st.radio("Theme", ["Dark", "Light"], index=0 if st.session_state.get("theme", "Dark") == "Dark" else 1, horizontal=True, label_visibility="collapsed")
-    if theme_choice != st.session_state.get("theme", "Dark"):
-        st.session_state.theme = theme_choice
-        st.rerun()
-
     # Brand block
     st.markdown(f"""
         <div style="display:flex; align-items:center; gap:10px; padding:4px 8px; margin-bottom:12px;">
-            <div style="width:30px;height:30px;background:{'#F3F4F6' if theme_choice == 'Light' else '#191A1C'};border:1px solid {'rgba(0,0,0,0.1)' if theme_choice == 'Light' else '#232426'};border-radius:50%;display:flex;align-items:center;justify-content:center;">
-                <span style="font-family:'Manrope';font-weight:800;color:{'#1D4ED8' if theme_choice == 'Light' else '#bec2ff'};font-size:13px;">S</span>
+            <div style="width:30px;height:30px;background:#f1f0e8;border:1px solid #2d2d29;border-radius:2px;display:flex;align-items:center;justify-content:center;">
+                <span style="font-family:'Cascadia Mono', monospace;font-weight:600;color:#070807;font-size:14px;">C</span>
             </div>
             <div>
-                <div style="font-family:'Manrope';font-weight:700;font-size:1.05rem;letter-spacing:-0.04em;color:{'#111827' if theme_choice == 'Light' else '#FFFFFF'};">STUDY OS</div>
-                <div style="font-family:'JetBrains Mono';font-size:0.6rem;color:{'#6B7280' if theme_choice == 'Light' else '#9A9DA3'};letter-spacing:0.15em;text-transform:uppercase;">Precision Learning</div>
+                <div style="font-family:'Cascadia Mono', monospace;font-weight:400;font-size:14px;color:#f1f0e8;">STUDY OS</div>
+                <div style="font-family:'Cascadia Mono', monospace;font-size:12px;color:#a6a39b;text-transform:uppercase;">Precision Learning</div>
             </div>
         </div>
     """, unsafe_allow_html=True)
@@ -506,46 +466,42 @@ with st.sidebar:
     # NEW WORKSPACE button
     st.markdown(f"""
         <div style="padding:0 4px; margin-bottom:16px;">
-            <div style="background:{'#111827' if theme_choice == 'Light' else '#e5e2e3'};color:{'#FFFFFF' if theme_choice == 'Light' else '#070708'};font-family:'JetBrains Mono';font-size:0.7rem;font-weight:700;
-                        text-align:center;padding:8px;border-radius:4px;text-transform:uppercase;letter-spacing:0.08em;
-                        cursor:pointer;">
+            <div style="background:#171815;color:#f1f0e8;border:1px solid #2d2d29;font-family:'Cascadia Mono', monospace;font-size:13px;
+                        text-align:center;padding:8px;border-radius:4px;
+                        cursor:pointer;transition:all 200ms ease;"
+                 onmouseover="this.style.background='rgba(22, 23, 20, 1)'"
+                 onmouseout="this.style.background='#171815'">
                 + New Workspace
             </div>
         </div>
     """, unsafe_allow_html=True)
 
-    svg_brain = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>'
-    svg_pen = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>'
-    svg_chart = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>'
+    svg_brain = '<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>'
+    svg_pen = '<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>'
+    svg_chart = '<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>'
+    svg_note = '<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>'
     
     current_page = st.session_state.current_page
     
     st.markdown(f"""
-        <div style="display:flex; flex-direction:column; gap:2px;">
-            <a href="?page=explain" target="_self" class="sb-nav-item {'sb-nav-active' if current_page == 'explain' else ''}">
+        <div style="display:flex; flex-direction:column; gap:8px;">
+            <a href="?page=explain" target="_self" style="display:flex; align-items:center; gap:10px; color:{'#f1f0e8' if current_page == 'explain' else '#a6a39b'}; text-decoration:none; font-family:'Cascadia Mono', monospace; font-size:14px; padding:10px 12px; background:{'rgba(22, 23, 20, 1)' if current_page == 'explain' else 'transparent'}; border-left:{'2px solid #f1f0e8' if current_page == 'explain' else '2px solid transparent'}; border-radius:4px;">
                 {svg_brain} Explain & Memorize
             </a>
-            <a href="?page=quiz" target="_self" class="sb-nav-item {'sb-nav-active' if current_page == 'quiz' else ''}">
+            <a href="?page=quiz" target="_self" style="display:flex; align-items:center; gap:10px; color:{'#f1f0e8' if current_page == 'quiz' else '#a6a39b'}; text-decoration:none; font-family:'Cascadia Mono', monospace; font-size:14px; padding:10px 12px; background:{'rgba(22, 23, 20, 1)' if current_page == 'quiz' else 'transparent'}; border-left:{'2px solid #f1f0e8' if current_page == 'quiz' else '2px solid transparent'}; border-radius:4px;">
                 {svg_pen} Quiz Builder
             </a>
-            <a href="?page=analytics" target="_self" class="sb-nav-item {'sb-nav-active' if current_page == 'analytics' else ''}">
+            <a href="?page=analytics" target="_self" style="display:flex; align-items:center; gap:10px; color:{'#f1f0e8' if current_page == 'analytics' else '#a6a39b'}; text-decoration:none; font-family:'Cascadia Mono', monospace; font-size:14px; padding:10px 12px; background:{'rgba(22, 23, 20, 1)' if current_page == 'analytics' else 'transparent'}; border-left:{'2px solid #f1f0e8' if current_page == 'analytics' else '2px solid transparent'}; border-radius:4px;">
                 {svg_chart} Analytics & Roadmap
+            </a>
+            <a href="?page=notes" target="_self" style="display:flex; align-items:center; gap:10px; color:{'#f1f0e8' if current_page == 'notes' else '#a6a39b'}; text-decoration:none; font-family:'Cascadia Mono', monospace; font-size:14px; padding:10px 12px; background:{'rgba(22, 23, 20, 1)' if current_page == 'notes' else 'transparent'}; border-left:{'2px solid #f1f0e8' if current_page == 'notes' else '2px solid transparent'}; border-radius:4px;">
+                {svg_note} My Notes
             </a>
         </div>
     """, unsafe_allow_html=True)
 
-    # Spacer then bottom links
+    # Spacer
     st.markdown("<div style='flex:1;min-height:200px'></div>", unsafe_allow_html=True)
-    st.markdown(f"""
-        <div style="border-top:1px solid {'rgba(0,0,0,0.1)' if theme_choice == 'Light' else '#232426'};padding-top:12px;margin-top:12px;">
-            <div style="padding:8px 12px;color:{'#6B7280' if theme_choice == 'Light' else '#9A9DA3'};font-family:'JetBrains Mono';font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;vertical-align:middle"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg> Settings
-            </div>
-            <div style="padding:8px 12px;color:{'#6B7280' if theme_choice == 'Light' else '#9A9DA3'};font-family:'JetBrains Mono';font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:6px;vertical-align:middle"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg> Support
-            </div>
-        </div>
-    """, unsafe_allow_html=True)
 
 
 # ═══════════════════════════════════════════════════════
@@ -610,7 +566,7 @@ if st.session_state.current_page == "explain":
         </div>
     """, unsafe_allow_html=True)
 
-    with st.container():
+    with st.container(border=True):
         st.markdown(f"""
             <div style="padding:4px;">
                 <h3 style="font-size:1.3rem;margin-bottom:12px;color:#bec2ff;">{st.session_state.explain_topic}</h3>
@@ -623,16 +579,15 @@ if st.session_state.current_page == "explain":
     # Memory Vectors — flashcards grid
     st.markdown(f"""
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-            <span class="fig-label">Memory Vectors [{len(st.session_state.explain_flashcards)}]</span>
+            <span class="fig-label">Memory Vectors</span>
         </div>
     """, unsafe_allow_html=True)
 
     card_cols = st.columns(min(len(st.session_state.explain_flashcards), 3), gap="medium")
     for idx, card in enumerate(st.session_state.explain_flashcards[:3]):
         with card_cols[idx]:
-            with st.container():
+            with st.container(border=True):
                 st.markdown(f"""
-                    <div class="fig-label" style="color:#50d8e9;">CARD.{idx+1:02d}</div>
                     <h4 style="font-size:1rem;margin-bottom:6px;">{card['q'].split('?')[0].split('.')[-1].strip()[:40]}</h4>
                     <p style="color:#9A9DA3;font-size:0.82rem;line-height:1.5;">{card['a'][:100]}</p>
                 """, unsafe_allow_html=True)
@@ -642,9 +597,8 @@ if st.session_state.current_page == "explain":
         card_cols2 = st.columns(min(len(st.session_state.explain_flashcards) - 3, 3), gap="medium")
         for idx, card in enumerate(st.session_state.explain_flashcards[3:]):
             with card_cols2[idx]:
-                with st.container():
+                with st.container(border=True):
                     st.markdown(f"""
-                        <div class="fig-label" style="color:#50d8e9;">CARD.{idx+4:02d}</div>
                         <h4 style="font-size:1rem;margin-bottom:6px;">{card['q'].split('?')[0].split('.')[-1].strip()[:40]}</h4>
                         <p style="color:#9A9DA3;font-size:0.82rem;line-height:1.5;">{card['a'][:100]}</p>
                     """, unsafe_allow_html=True)
@@ -667,7 +621,7 @@ elif st.session_state.current_page == "quiz":
     with quiz_left:
         # FIG 1 // Source Telemetry
         st.markdown("<div class='fig-label'>FIG. 1 // Source Telemetry</div>", unsafe_allow_html=True)
-        with st.container():
+        with st.container(border=True):
             with st.form("quiz_gen_form"):
                 raw_text_input = st.text_area(
                     "Source",
@@ -781,7 +735,7 @@ elif st.session_state.current_page == "analytics":
     st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
 
     # FIG 4 // Activity Signal — Heatmap
-    with st.container():
+    with st.container(border=True):
         st.markdown("<div class='fig-label'>FIG. 4 // Activity Signal</div>", unsafe_allow_html=True)
 
         daily_counts = df_act.groupby("Date").size().to_dict()
@@ -818,7 +772,7 @@ elif st.session_state.current_page == "analytics":
     st.markdown("<div style='height:16px'></div>", unsafe_allow_html=True)
 
     # FIG 5 // Knowledge Topology — Mermaid Roadmap
-    with st.container():
+    with st.container(border=True):
         st.markdown("<div class='fig-label'>FIG. 5 // Knowledge Topology</div>", unsafe_allow_html=True)
 
         mermaid_html = f"""
@@ -835,12 +789,46 @@ elif st.session_state.current_page == "analytics":
 
 
 # ═══════════════════════════════════════════════════════
+#  PAGE: MY NOTES
+# ═══════════════════════════════════════════════════════
+elif st.session_state.current_page == "notes":
+    st.markdown("## My Notes")
+    st.markdown("<div class='fig-label'>Add and review personal notes here.</div>", unsafe_allow_html=True)
+
+    with st.form("add_note_form"):
+        new_note = st.text_area(
+            "New Note",
+            placeholder="Type your note here...",
+            height=120,
+            label_visibility="collapsed"
+        )
+        submit_note = st.form_submit_button("SAVE NOTE")
+    
+    if submit_note and new_note.strip():
+        st.session_state.my_notes.insert(0, {
+            "text": new_note.strip(),
+            "date": datetime.now().strftime("%Y-%m-%d %H:%M")
+        })
+        st.rerun()
+
+    st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
+    
+    if not st.session_state.my_notes:
+        st.info("No notes added yet.")
+    else:
+        for note in st.session_state.my_notes:
+            with st.container(border=True):
+                st.markdown(f"<div style='font-family:\"Cascadia Mono\", monospace;font-size:12px;color:#9A9DA3;margin-bottom:8px;'>{note['date']}</div>", unsafe_allow_html=True)
+                st.markdown(f"<p style='color:#f1f0e8;font-size:0.95rem;line-height:1.6;'>{note['text']}</p>", unsafe_allow_html=True)
+
+
+# ═══════════════════════════════════════════════════════
 #  MASTER INGESTION STREAM — always visible at bottom
 # ═══════════════════════════════════════════════════════
 st.markdown("<div style='height:32px'></div>", unsafe_allow_html=True)
 st.markdown("<div class='fig-label'>System // Multimodal Ingestion</div>", unsafe_allow_html=True)
 
-with st.container():
+with st.container(border=True):
     with st.form("master_input_form"):
         form_col1, form_col2 = st.columns([2.5, 1], gap="medium")
         with form_col1:
