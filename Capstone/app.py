@@ -457,8 +457,8 @@ with st.sidebar:
                 <span style="font-family:'Cascadia Mono', monospace;font-weight:600;color:#070807;font-size:14px;">C</span>
             </div>
             <div>
-                <div style="font-family:'Cascadia Mono', monospace;font-weight:400;font-size:14px;color:#f1f0e8;">Classroom Memory</div>
-                <div style="font-family:'Cascadia Mono', monospace;font-size:12px;color:#a6a39b;text-transform:uppercase;">Marketing Site UI</div>
+                <div style="font-family:'Cascadia Mono', monospace;font-weight:400;font-size:14px;color:#f1f0e8;">STUDY OS</div>
+                <div style="font-family:'Cascadia Mono', monospace;font-size:12px;color:#a6a39b;text-transform:uppercase;">Precision Learning</div>
             </div>
         </div>
     """, unsafe_allow_html=True)
@@ -500,18 +500,8 @@ with st.sidebar:
         </div>
     """, unsafe_allow_html=True)
 
-    # Spacer then bottom links
+    # Spacer
     st.markdown("<div style='flex:1;min-height:200px'></div>", unsafe_allow_html=True)
-    st.markdown(f"""
-        <div style="border-top:1px solid #2d2d29;padding-top:12px;margin-top:12px;">
-            <div style="padding:8px 12px;color:#a6a39b;font-family:'Cascadia Mono', monospace;font-size:13px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px;vertical-align:middle"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg> Settings
-            </div>
-            <div style="padding:8px 12px;color:#a6a39b;font-family:'Cascadia Mono', monospace;font-size:13px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px;vertical-align:middle"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg> Support
-            </div>
-        </div>
-    """, unsafe_allow_html=True)
 
 
 # ═══════════════════════════════════════════════════════
