@@ -2,9 +2,14 @@
 
 > **Status:** `SYSTEM NOMINAL` | **Build:** `STITCH-1.4.2` | **Telemetry:** `ONLINE`
 
-**STUDY OS** is an AI-powered, multimodal precision learning platform developed for the MirAI School of Technology Capstone. It leverages Streamlit, Pandas, and the Gemini AI Engine to dynamically synthesize study materials into high-retention flashcards, matrix evaluations, and knowledge topologies.
+**MirAI Internship & Capstone Project Repository**
+
+Welcome to the official repository for the MirAI School of Technology Internship assignments and the final Capstone Project. This repository houses all coursework (Assignments 1-7) cleanly organized in the `assignments/` directory, while the root serves as the definitive codebase for the final capstone: **STUDY OS**.
+
+**STUDY OS** is an AI-powered, multimodal precision learning platform developed for the Capstone. It leverages Streamlit, Pandas, and the Gemini AI Engine to dynamically synthesize study materials into high-retention flashcards, matrix evaluations, and knowledge topologies.
 
 Designed with a strict "Cinematic Precision" design system (Stitch UI), it ditches standard interfaces for a glassmorphic, terminal-aesthetic architecture tailored for deep work.
+
 
 ---
 
@@ -67,6 +72,6 @@ streamlit run app.py
 
 The application is engineered for immediate deployment on **Streamlit Community Cloud**.
 
-**Live Link:** `[PENDING DEPLOYMENT — Insert Streamlit Cloud URL here]`
+**Live Link:** `https://miraistudyos.streamlit.app/`
 
 *(See `system_design.md` for in-depth architecture and data flow).*
