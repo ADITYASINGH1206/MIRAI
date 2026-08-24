@@ -261,6 +261,9 @@ def init_state():
     if "activity_log" not in st.session_state:
         st.session_state.activity_log = generate_mock_activity_log()
 
+    if "my_notes" not in st.session_state:
+        st.session_state.my_notes = []
+
     # Prerequisite Roadmap
     if "mermaid_code" not in st.session_state:
         st.session_state.mermaid_code = """graph TD
@@ -476,6 +479,7 @@ with st.sidebar:
     svg_brain = '<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>'
     svg_pen = '<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>'
     svg_chart = '<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>'
+    svg_note = '<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>'
     
     current_page = st.session_state.current_page
     
@@ -489,6 +493,9 @@ with st.sidebar:
             </a>
             <a href="?page=analytics" target="_self" style="display:flex; align-items:center; gap:10px; color:{'#f1f0e8' if current_page == 'analytics' else '#a6a39b'}; text-decoration:none; font-family:'Cascadia Mono', monospace; font-size:14px; padding:10px 12px; background:{'rgba(22, 23, 20, 1)' if current_page == 'analytics' else 'transparent'}; border-left:{'2px solid #f1f0e8' if current_page == 'analytics' else '2px solid transparent'}; border-radius:4px;">
                 {svg_chart} Analytics & Roadmap
+            </a>
+            <a href="?page=notes" target="_self" style="display:flex; align-items:center; gap:10px; color:{'#f1f0e8' if current_page == 'notes' else '#a6a39b'}; text-decoration:none; font-family:'Cascadia Mono', monospace; font-size:14px; padding:10px 12px; background:{'rgba(22, 23, 20, 1)' if current_page == 'notes' else 'transparent'}; border-left:{'2px solid #f1f0e8' if current_page == 'notes' else '2px solid transparent'}; border-radius:4px;">
+                {svg_note} My Notes
             </a>
         </div>
     """, unsafe_allow_html=True)
@@ -582,7 +589,7 @@ if st.session_state.current_page == "explain":
     # Memory Vectors — flashcards grid
     st.markdown(f"""
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-            <span class="fig-label">Memory Vectors [{len(st.session_state.explain_flashcards)}]</span>
+            <span class="fig-label">Memory Vectors</span>
         </div>
     """, unsafe_allow_html=True)
 
@@ -591,7 +598,6 @@ if st.session_state.current_page == "explain":
         with card_cols[idx]:
             with st.container(border=True):
                 st.markdown(f"""
-                    <div class="fig-label" style="color:#50d8e9;">CARD.{idx+1:02d}</div>
                     <h4 style="font-size:1rem;margin-bottom:6px;">{card['q'].split('?')[0].split('.')[-1].strip()[:40]}</h4>
                     <p style="color:#9A9DA3;font-size:0.82rem;line-height:1.5;">{card['a'][:100]}</p>
                 """, unsafe_allow_html=True)
@@ -603,7 +609,6 @@ if st.session_state.current_page == "explain":
             with card_cols2[idx]:
                 with st.container(border=True):
                     st.markdown(f"""
-                        <div class="fig-label" style="color:#50d8e9;">CARD.{idx+4:02d}</div>
                         <h4 style="font-size:1rem;margin-bottom:6px;">{card['q'].split('?')[0].split('.')[-1].strip()[:40]}</h4>
                         <p style="color:#9A9DA3;font-size:0.82rem;line-height:1.5;">{card['a'][:100]}</p>
                     """, unsafe_allow_html=True)
@@ -791,6 +796,40 @@ elif st.session_state.current_page == "analytics":
             primaryBorderColor:'#5E6BFF',lineColor:'#bec2ff',secondaryColor:'#191A1C',tertiaryColor:'#070708'
         }}}});</script></body></html>"""
         components.html(mermaid_html, height=380, scrolling=True)
+
+
+# ═══════════════════════════════════════════════════════
+#  PAGE: MY NOTES
+# ═══════════════════════════════════════════════════════
+elif st.session_state.current_page == "notes":
+    st.markdown("## My Notes")
+    st.markdown("<div class='fig-label'>Add and review personal notes here.</div>", unsafe_allow_html=True)
+
+    with st.form("add_note_form"):
+        new_note = st.text_area(
+            "New Note",
+            placeholder="Type your note here...",
+            height=120,
+            label_visibility="collapsed"
+        )
+        submit_note = st.form_submit_button("SAVE NOTE")
+    
+    if submit_note and new_note.strip():
+        st.session_state.my_notes.insert(0, {
+            "text": new_note.strip(),
+            "date": datetime.now().strftime("%Y-%m-%d %H:%M")
+        })
+        st.rerun()
+
+    st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
+    
+    if not st.session_state.my_notes:
+        st.info("No notes added yet.")
+    else:
+        for note in st.session_state.my_notes:
+            with st.container(border=True):
+                st.markdown(f"<div style='font-family:\"Cascadia Mono\", monospace;font-size:12px;color:#9A9DA3;margin-bottom:8px;'>{note['date']}</div>", unsafe_allow_html=True)
+                st.markdown(f"<p style='color:#f1f0e8;font-size:0.95rem;line-height:1.6;'>{note['text']}</p>", unsafe_allow_html=True)
 
 
 # ═══════════════════════════════════════════════════════
